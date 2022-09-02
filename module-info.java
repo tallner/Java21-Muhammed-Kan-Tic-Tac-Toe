@@ -1,0 +1,2 @@
+module uppgift.java {
+}
