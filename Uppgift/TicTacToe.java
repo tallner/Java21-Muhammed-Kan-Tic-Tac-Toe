@@ -48,6 +48,8 @@ public class TicTacToe {
             System.out.println(result);
             break;
         }
+        
+        //
 
     }
 
@@ -109,16 +111,16 @@ public class TicTacToe {
 
     public static String checkWinner() {
 
-        List topRow = Arrays.asList(1, 2, 3);
-        List midRow = Arrays.asList(4, 5, 6);
-        List botRow = Arrays.asList(7, 8,9);
-        List leftCol = Arrays.asList(1, 2, 7);
-        List midCol = Arrays.asList(2, 5, 8);
-        List rightCol = Arrays.asList(3, 6, 9);
-        List cross1 = Arrays.asList(1, 5, 9);
-        List cross2 = Arrays.asList(3, 5, 7);
+        List<Integer> topRow = Arrays.asList(1, 2, 3);
+        List<Integer> midRow = Arrays.asList(4, 5, 6);
+        List<Integer> botRow = Arrays.asList(7, 8,9);
+        List<Integer> leftCol = Arrays.asList(1, 2, 7);
+        List<Integer> midCol = Arrays.asList(2, 5, 8);
+        List<Integer> rightCol = Arrays.asList(3, 6, 9);
+        List<Integer> cross1 = Arrays.asList(1, 5, 9);
+        List<Integer> cross2 = Arrays.asList(3, 5, 7);
 
-        List<List> winConditions = new ArrayList<List>();
+        List<List<Integer>> winConditions = new ArrayList<List<Integer>>();
         winConditions.add(topRow);
         winConditions.add(midRow);
         winConditions.add(botRow);
@@ -128,7 +130,7 @@ public class TicTacToe {
         winConditions.add(cross1);
         winConditions.add(cross2);
 
-        for(List l : winConditions) {
+        for(List<Integer> l : winConditions) {
             if(playerPositions.containsAll(l)) {
                 return "Congratulations you won!";
             } else if (cpuPositions.containsAll(l)) {
