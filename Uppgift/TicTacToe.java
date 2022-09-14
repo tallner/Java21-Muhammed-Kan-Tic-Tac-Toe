@@ -12,6 +12,12 @@ public class TicTacToe {
     static ArrayList<Integer> cpuPositions = new ArrayList<Integer>();
 
     public static void main(String[] args) {
+    	//Codereview: declared playerPos so it can be used in try catch
+    	int playerPos = 0;
+    	//Codereview: Declared scanner outside while, does not need a new scanner every cycle
+    	Scanner scan = new Scanner(System.in);
+    	
+    	
         char[][] gameBoard = {
                 {' ', '|', ' ', '|', ' '},
                 {'-', '+', '-', '+', '-'},
@@ -22,12 +28,16 @@ public class TicTacToe {
     printGameBoard(gameBoard);
 
     while(true) {
-        Scanner scan = new Scanner(System.in);
+        
         System.out.println("Enter your placement (1-9):");
-        int playerPos = scan.nextInt();
+        
+        playerPos = getUserInput(scan);
+        
+        
         while(playerPositions.contains(playerPos) || cpuPositions.contains(playerPos)) {
             System.out.println("position taken! Enter a correct Position");
-            playerPos = scan.nextInt();
+        
+            playerPos = getUserInput(scan);
         }
 
         placePiece(gameBoard, playerPos, "player");
@@ -48,14 +58,31 @@ public class TicTacToe {
             System.out.println(result);
             break;
         }
-        
-        //
 
     }
 
     }
+    
+    
+    //Codereview:take care of user input with recursive call
+    private static int getUserInput(Scanner scan) {
+    	String res = scan.next();
+    	int returnval = 0;
+    	
+    	if (res.matches("[0-9]"))
+    		returnval = Integer.parseInt(res);
+    	else {
+    		System.out.println("Input needs to be a number");
+    		returnval = getUserInput(scan);
+    	}
+    	
+    	return returnval;
+    		   	
+    	
+    }
+    
 
-    public static void printGameBoard(char[][] gameBoard) {
+    private static void printGameBoard(char[][] gameBoard) {
         for(char[] row : gameBoard) {
             for(char c : row) {
                 System.out.print(c);
@@ -64,7 +91,7 @@ public class TicTacToe {
         }
     }
 
-    public static void placePiece(char[][] gameBoard, int pos, String user) {
+    private static void placePiece(char[][] gameBoard, int pos, String user) {
 
         char symbol = ' ';
 
@@ -109,8 +136,9 @@ public class TicTacToe {
         }
     }
 
-    public static String checkWinner() {
+    private static String checkWinner() {
 
+    	//Codereview: added Integer type in the list
         List<Integer> topRow = Arrays.asList(1, 2, 3);
         List<Integer> midRow = Arrays.asList(4, 5, 6);
         List<Integer> botRow = Arrays.asList(7, 8,9);
