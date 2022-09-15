@@ -43,6 +43,8 @@ public class TicTacToe {
         placePiece(gameBoard, playerPos, "player");
         String result = checkWinner();
         if (result.length() > 0) {
+        	//Codereview: To draw the last X if you win this method needs to be called again
+        	printGameBoard(gameBoard);
             System.out.println(result);
             break;
         }
@@ -77,8 +79,6 @@ public class TicTacToe {
     	}
     	
     	return returnval;
-    		   	
-    	
     }
     
 
