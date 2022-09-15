@@ -46,10 +46,10 @@ public class TicTacToe {
     	String res = scan.next();
     	int returnval = 0;
     	
-    	if (res.matches("[0-9]"))
+    	if (res.matches("[1-9]"))
     		returnval = Integer.parseInt(res);
     	else {
-    		System.out.println("Input needs to be a number");
+    		System.out.println("Input needs to be a number between 1 and 9");
     		returnval = getUserInput(scan);
     	}
     	
