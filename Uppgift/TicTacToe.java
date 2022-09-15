@@ -25,43 +25,18 @@ public class TicTacToe {
                 {'-', '+', '-', '+', '-'},
                 {' ', '|', ' ', '|', ' '}
         };
-    printGameBoard(gameBoard);
-
-    while(true) {
-        
-        System.out.println("Enter your placement (1-9):");
-        
-        playerPos = getUserInput(scan);
-        
-        
-        while(playerPositions.contains(playerPos) || cpuPositions.contains(playerPos)) {
-            System.out.println("position taken! Enter a correct Position");
-        
-            playerPos = getUserInput(scan);
-        }
-
-        placePiece(gameBoard, playerPos, "player");
-        String result = checkWinner();
-        if (result.length() > 0) {
-        	//Codereview: To draw the last X if you win this method needs to be called again
-        	printGameBoard(gameBoard);
-            System.out.println(result);
-            break;
-        }
-        Random rand = new Random();
-        int cpuPos = rand.nextInt(9) + 1;
-        while(playerPositions.contains(cpuPos) || cpuPositions.contains(cpuPos)) {
-            cpuPos = rand.nextInt(9) + 1;
-        }
-        placePiece(gameBoard, cpuPos, "cpu");
         printGameBoard(gameBoard);
-        result = checkWinner();
-        if (result.length() > 0) {
-            System.out.println(result);
-            break;
-        }
 
-    }
+	    while(true) {
+	        
+	        System.out.println("Enter your placement (1-9):");
+	        
+	        playerPos = getUserInput(scan);
+	        
+	        if (gameEngine(gameBoard, playerPos, "player").length() > 0) break;
+	        if (gameEngine(gameBoard, 0, "cpu").length() > 0) break;
+	
+	    }
 
     }
     
@@ -171,4 +146,34 @@ public class TicTacToe {
         return "";
     }
 	
+  
+    //Codereview:might be easier to read if there is a method for taking care of the inputs and checking winner 
+    private static String gameEngine(char[][] gameBoard, int pos, String user) {
+    	Random rand = null;
+    	int cpuPos = 0;
+    	
+    	if (user.equals("cpu")) {
+            rand = new Random();
+            cpuPos = rand.nextInt(9) + 1;
+            while(playerPositions.contains(cpuPos) || cpuPositions.contains(cpuPos)) {
+                cpuPos = rand.nextInt(9) + 1;
+            }
+            placePiece(gameBoard, cpuPos, user);
+            printGameBoard(gameBoard);
+        }else {
+        	placePiece(gameBoard, pos, user);
+        }
+    	
+    	
+        String result = checkWinner();
+        if (result.length() > 0) {
+        	if (user.equals("player"))
+        		printGameBoard(gameBoard);
+        	System.out.println(result);
+        	return result;
+        }
+        
+        return "";
+        
+    }
 }
