@@ -16,20 +16,10 @@ public class TicTacToe {
     	int playerPos = 0;
     	//Codereview: Declared scanner outside while, does not need a new scanner every cycle
     	Scanner scan = new Scanner(System.in);
-    	
-    	
-        char[][] gameBoard = {
-                {' ', '|', ' ', '|', ' '},
-                {'-', '+', '-', '+', '-'},
-                {' ', '|', ' ', '|', ' '},
-                {'-', '+', '-', '+', '-'},
-                {' ', '|', ' ', '|', ' '}
-        };
-        printGameBoard(gameBoard);
+    	//Codereview: Added an init for UI to draw the board and to give the user a bit more information
+    	char[][] gameBoard = initUI();
 
 	    while(true) {
-	        
-	        System.out.println("Enter your placement (1-9):");
 	        
 	        playerPos = getUserInput(scan);
 	        
@@ -43,6 +33,7 @@ public class TicTacToe {
     
     //Codereview:take care of user input with recursive call
     private static int getUserInput(Scanner scan) {
+    	System.out.println("Enter your placement (1-9):");
     	String res = scan.next();
     	int returnval = 0;
     	
@@ -176,4 +167,39 @@ public class TicTacToe {
         return "";
         
     }
+    
+  //Codereview:added a small initial UI so the user can understand the rules
+    private static char[][] initUI() {
+    	char[][] initGameBoard = {
+                {' ', '|', ' ', '|', ' '},
+                {'-', '+', '-', '+', '-'},
+                {' ', '|', ' ', '|', ' '},
+                {'-', '+', '-', '+', '-'},
+                {' ', '|', ' ', '|', ' '}
+        };
+    	char[][] gameBoardNumbers = {
+                {'1', '|', '2', '|', '3'},
+                {'-', '+', '-', '+', '-'},
+                {'4', '|', '5', '|', '6'},
+                {'-', '+', '-', '+', '-'},
+                {'7', '|', '8', '|', '9'}
+        };
+    	System.out.println("Welcome to Tic Tac Toe");
+    	System.out.println("Type a nr between 1 and 9");
+    	System.out.println("1 is the first box in the first row");
+    	System.out.println("9 is the last box in the last row");
+    	System.out.println("");
+    	printGameBoard(gameBoardNumbers);
+    	System.out.println("");
+    	System.out.println("You are X");
+    	System.out.println("CPU is O");
+    	System.out.println("First player to get 3 in a row wins");
+    	System.out.println("Good Luck!");
+    	System.out.println("");
+    	
+        //printGameBoard(initGameBoard);
+        System.out.println("");
+        return initGameBoard;
+    }
+    
 }
